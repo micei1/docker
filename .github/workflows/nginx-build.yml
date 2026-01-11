@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: Check out code
@@ -27,9 +27,11 @@ jobs:
         id: get_versions
         run: |
           # echo "NGINX_VERSION=$(curl -s https://api.github.com/repos/nginx/nginx/releases/latest | grep -oP '"tag_name": "\K[^"]+' | sed 's/release-//')" >> $GITHUB_ENV
-          echo "NGINX_VERSION=1.29.3" >> $GITHUB_ENV
+          echo "NGINX_VERSION=1.29.4" >> $GITHUB_ENV
           echo "ZSTD_VERSION=$(curl -s https://api.github.com/repos/facebook/zstd/releases/latest | grep -oP '"tag_name": "\K[^"]+' | sed 's/v//')" >> $GITHUB_ENV
+          # echo "CORERULESET_VERSION=4.22.0" >> $GITHUB_ENV
           echo "CORERULESET_VERSION=$(curl -s https://api.github.com/repos/coreruleset/coreruleset/releases/latest | grep -oP '"tag_name": "\K[^"]+' | sed 's/v//')" >> $GITHUB_ENV
+
 
       - name: Build and push NGINX image 
         uses: docker/build-push-action@v4
